@@ -12,5 +12,5 @@ while offset < len(buffer):
 	i = pydasm.get_instruction(buffer[offset:], pydasm.MODE_32)
 	print pydasm.get_instruction_string(i, pydasm.FORMAT_INTEL, 0)
 	if not i:
-    		break
+		break
 	offset += i.length
