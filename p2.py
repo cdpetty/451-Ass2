@@ -11,7 +11,7 @@ end = 1
 streak = 0
 streak_arr = []
 while end < len(buffer):
-	i = pydasm.get_instruction('', pydasm.MODE_32)
+	i = pydasm.get_instruction(buffer[start:end], pydasm.MODE_32)
 	print 'hex:', ' '.join([format(c, 'x') for c in bytearray(buffer[start:end])])
 	if i.length != end - start:
 		print 'OFF TRACK'
@@ -27,4 +27,6 @@ while end < len(buffer):
 	print '----'
 	end += 1
 
-
+print 'Largest streak:', max(streak_arr)
+print 'Avg streak:', sum(streak_arr)/len(streak_arr)
+print 'Num Streaks:', len(streak_arr)
