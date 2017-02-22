@@ -10,7 +10,7 @@ start = 0
 end = 1
 streak = 0
 streak_arr = []
-while end < len(buffer):
+while end <= len(buffer):
 	i = pydasm.get_instruction(buffer[start:end], pydasm.MODE_32)
 	print 'hex:', ' '.join([format(c, 'x') for c in bytearray(buffer[start:end])])
 	if i.length != end - start:
