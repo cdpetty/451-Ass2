@@ -1,4 +1,8 @@
-Simply run either of the files by running them with python.  They do not require any commandline input. 
+p1.py runs on python2 using the pydasm library found at https://github.com/axcheron/pydasm
 
-All you need is pydasm to run.
+The final file for this problem is p1_attemp_2.py
 
+The attempt_2 file will output all invalid instructions into a file called output
+
+To run, simply use
+$python p1_attempt_2.py
