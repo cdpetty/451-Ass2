@@ -1,4 +1,4 @@
-import pydasm, binascii
+import pydasm, binascii, signal
 
 
 def gen_one_byte():
@@ -12,19 +12,32 @@ def gen_str_from_byte(byte):
     return binascii.hexlify(byte)
 
 
-def check_validity(byte):
+def check_validity(byte, f):
     for one_byte1 in gen_one_byte():
         instruction = byte + one_byte1
         i = pydasm.get_instruction(instruction, pydasm.MODE_32)
+
         if not i or i.length > len(instruction):
-            print gen_str_from_byte(instruction), 'is INVALID of length', len(instruction)
+            # print gen_str_from_byte(instruction), 'is INVALID of length', len(instruction)
+
             if len(instruction) <= 4:
-                pass
-                check_validity(instruction)
+                check_validity(instruction, f)
+
+            str_instr = gen_str_from_byte(instruction)
+
+            print str_instr, 'is INVALID of length', len(str_instr)
+            f.write(str_instr + '\n')
 
 def main():
-    check_validity('')
-     
+    f = open('output.txt', 'w')
+    check_validity('', f)
+
+    def sigint_handler():
+        f.close()
+        return
+
+    signal.signal(signal.SIGINT, sigint_handler)     
+    
 
 if __name__=='__main__':
     main()
